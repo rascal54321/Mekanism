@@ -169,7 +169,6 @@ public class ItemPartTransmitter extends JItemMultiPart
 	{
 		for(TransmitterType type : TransmitterType.values())
 		{
-			if(type == TransmitterType.HEAT_TRANSMITTER) continue; //TODO
 			listToAddTo.add(new ItemStack(item, 1, type.ordinal()));
 		}
 	}

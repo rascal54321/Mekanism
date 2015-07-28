@@ -78,15 +78,7 @@ public class MultipartHeatTransmitter extends MultipartTransmitter<IHeatTransfer
 	@Override
 	public IHeatTransfer getAdjacent(ForgeDirection side)
 	{
-		if(getPart().connectionMapContainsSide(getPart().getAllCurrentConnections(), side))
-		{
-			TileEntity adj = coord().getFromSide(side).getTileEntity(world());
-			if(adj instanceof IHeatTransfer)
-			{
-				return (IHeatTransfer)adj;
-			}
-		}
-		return null;
+		return getPart().getCachedAcceptor(side);
 	}
 
 	@Override

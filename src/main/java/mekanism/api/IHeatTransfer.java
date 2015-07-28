@@ -18,8 +18,10 @@ public interface IHeatTransfer
 
 	public void transferHeatTo(double heat);
 
-	public double[] simulateHeat();
+	/**Returns the amount of heat expelled from the object to other objects and lost to air*/
+	public double[/*2*/] simulateHeat();
 
+	/**Returns the new temperature*/
 	public double applyTemperatureChange();
 
 	public boolean canConnectHeat(ForgeDirection side);

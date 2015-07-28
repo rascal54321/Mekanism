@@ -24,7 +24,7 @@ import codechicken.lib.data.MCDataInput;
 import codechicken.lib.data.MCDataOutput;
 import codechicken.lib.vec.Vector3;
 
-public class PartHeatTransmitter extends PartTransmitter<IHeatTransfer, HeatNetwork>
+public class PartHeatTransmitter extends PartTransmitter<IHeatTransfer, HeatNetwork> implements IHeatTransfer
 {
 	public static TransmitterIcons heatIcons = new TransmitterIcons(1, 2);
 
@@ -117,6 +117,20 @@ public class PartHeatTransmitter extends PartTransmitter<IHeatTransfer, HeatNetw
 	}
 
 	@Override
+	public boolean onRightClick(EntityPlayer player, int side)
+	{
+		getTransmitter().temperature -= 10000;
+		return true;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean renderStatic(Vector3 pos, int pass)
+	{
+		return false;
+	}
+
+		@Override
 	@SideOnly(Side.CLIENT)
 	public void renderDynamic(Vector3 pos, float f, int pass)
 	{
@@ -177,5 +191,53 @@ public class PartHeatTransmitter extends PartTransmitter<IHeatTransfer, HeatNetw
 	public MultipartHeatTransmitter getTransmitter()
 	{
 		return (MultipartHeatTransmitter)transmitterDelegate;
+	}
+
+	@Override
+	public double getTemp()
+	{
+		return getTransmitter() == null ? 0 : getTransmitter().getTemp();
+	}
+
+	@Override
+	public double getInverseConductionCoefficient()
+	{
+		return getTransmitter() == null ? 0 : getTransmitter().getInverseConductionCoefficient();
+	}
+
+	@Override
+	public double getInsulationCoefficient(ForgeDirection side)
+	{
+		return getTransmitter() == null ? 0 : getTransmitter().getInsulationCoefficient(side);
+	}
+
+	@Override
+	public void transferHeatTo(double heat)
+	{
+		if(getTransmitter() != null) getTransmitter().transferHeatTo(heat);
+	}
+
+	@Override
+	public double[] simulateHeat()
+	{
+		return getTransmitter() == null ? new double[]{0,0} : getTransmitter().simulateHeat();
+	}
+
+	@Override
+	public double applyTemperatureChange()
+	{
+		return getTransmitter() == null ? 0 : getTransmitter().applyTemperatureChange();
+	}
+
+	@Override
+	public boolean canConnectHeat(ForgeDirection side)
+	{
+		return getTransmitter() == null ? false : getTransmitter().canConnectHeat(side);
+	}
+
+	@Override
+	public IHeatTransfer getAdjacent(ForgeDirection side)
+	{
+		return getTransmitter() == null ? null : getTransmitter().getAdjacent(side);
 	}
 }

@@ -100,6 +100,7 @@ import java.util.*;
  * 2:1: Solar Neutron Activator
  * 2:2: Ambient Accumulator
  * 2:3: Oredictionificator
+ * 2:4: Radiator
  * 
  * @author AidanBrady
  *
@@ -173,6 +174,7 @@ public class BlockMachine extends BlockContainer implements ISpecialBounds, IPer
 				icons[0][0] = register.registerIcon("mekanism:AmbientAccumulator");
 				icons[2][0] = BASE_ICON;
 				MekanismRenderer.loadDynamicTextures(register, MachineType.OREDICTIONIFICATOR.name, icons[3], DefIcon.getAll(register.registerIcon("mekanism:OredictionificatorSide")));
+				icons[4][0] = BASE_ICON;
 				break;
 		}
 	}
@@ -1086,7 +1088,8 @@ public class BlockMachine extends BlockContainer implements ISpecialBounds, IPer
 		ENTANGLED_BLOCK(MachineBlock.MACHINE_BLOCK_3, 0, "EntangledBlock", 46, TileEntityEntangledBlock.class, true, false, false),
 		SOLAR_NEUTRON_ACTIVATOR(MachineBlock.MACHINE_BLOCK_3, 1, "SolarNeutronActivator", 47, TileEntitySolarNeutronActivator.class, false, true, false),
 		AMBIENT_ACCUMULATOR(MachineBlock.MACHINE_BLOCK_3, 2, "AmbientAccumulator", 48, TileEntityAmbientAccumulator.class, true, false, false),
-		OREDICTIONIFICATOR(MachineBlock.MACHINE_BLOCK_3, 3, "Oredictionificator", 52, TileEntityOredictionificator.class, false, false, false);
+		OREDICTIONIFICATOR(MachineBlock.MACHINE_BLOCK_3, 3, "Oredictionificator", 52, TileEntityOredictionificator.class, false, false, false),
+		RADIATOR(MachineBlock.MACHINE_BLOCK_3, 4, "Radiator", -1, TileEntityRadiator.class, false, false, false);
 
 		public MachineBlock typeBlock;
 		public int meta;

@@ -9,6 +9,9 @@ import mekanism.api.IHeatTransfer;
 import mekanism.api.transmitters.DynamicNetwork;
 import mekanism.api.transmitters.IGridTransmitter;
 import mekanism.api.transmitters.TransmissionType;
+import mekanism.api.util.UnitDisplayUtils;
+import mekanism.api.util.UnitDisplayUtils.TemperatureUnit;
+import mekanism.common.util.MekanismUtils;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 
@@ -44,13 +47,13 @@ public class HeatNetwork extends DynamicNetwork<IHeatTransfer, HeatNetwork>
 	@Override
 	public String getStoredInfo()
 	{
-		return meanTemp + "K above ambient";
+		return MekanismUtils.getTemperatureDisplay(meanTemp, TemperatureUnit.AMBIENT);
 	}
 
 	@Override
 	public String getFlowInfo()
 	{
-		return heatTransferred + " transferred to acceptors,  " + heatLost + " lost to environment, " + (heatTransferred + heatLost == 0 ? "" : heatTransferred / (heatTransferred + heatLost) * 100 + "% efficiency");
+		return MekanismUtils.getEnergyDisplay(heatTransferred) + " transferred to acceptors,  " + MekanismUtils.getEnergyDisplay(heatLost) + " lost to environment, " + (heatTransferred + heatLost == 0 ? "" : UnitDisplayUtils.roundDecimals(heatTransferred / (heatTransferred + heatLost) * 100) + "% efficiency");
 	}
 
 	@Override
